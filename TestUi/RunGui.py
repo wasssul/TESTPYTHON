@@ -7,7 +7,7 @@ import os
 
 print(g().mainPath)
 g().set(mainPath=os.getcwd())
-g().loadScripts()
+#g().loadScripts()
 
 print(g().mainPath)
 #sys.path.append('ui')
