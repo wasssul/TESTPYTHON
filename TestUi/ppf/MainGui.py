@@ -2,9 +2,10 @@
 
 from PyQt5.QtWidgets import (QMainWindow, QFileDialog, QDockWidget)
 
+
 from ppf.ui.Menu import Menu
 from ppf.ui.OutText import OutText
-
+from ppf.core.Utils import g
 
         
 class MainGui(QMainWindow):
@@ -19,4 +20,6 @@ class MainGui(QMainWindow):
         fileName, _ = QFileDialog.getOpenFileName(self, "Open dataset", "", "All Files (*);;Dataset Files (*.arff)", options=options)
         if fileName:
             print(fileName)
+            
+        print(g().mainPath)
 
