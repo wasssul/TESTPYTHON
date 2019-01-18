@@ -3,6 +3,7 @@
 from PyQt5.QtCore import (Qt)
 from PyQt5.QtWidgets import (QTreeView, QDockWidget)
 from PyQt5.QtGui import (QStandardItemModel, QStandardItem)
+from _operator import add
 
 class OutText:
     
@@ -13,17 +14,12 @@ class OutText:
     def __init__(self, mainGui):
         self.mainGui = mainGui
         
-        self.dock = QDockWidget("OutText", self.mainGui)
-        self.dock.setAllowedAreas(Qt.BottomDockWidgetArea)
         self.treeView = QTreeView(self.mainGui)
         #self.treeView.setRootIsDecorated(False)
-        self.treeView.setAlternatingRowColors(True)        
-        self.dock.setWidget(self.treeView)
-        self.mainGui.addDockWidget(Qt.BottomDockWidgetArea, self.dock)
-        
+        self.treeView.setAlternatingRowColors(True)      
         self.treeModel = self.createModel()
         self.treeView.setModel(self.treeModel)
-        self.test()
+        #self.test()
         
     def test(self):
         row = QStandardItem('Test')
@@ -46,8 +42,11 @@ class OutText:
         self.treeModel.appendRow(row)
         ind = self.treeModel.indexFromItem(row) 
         rowNumber = ind.row()
-        #self.treeModel.setData(self.treeModel.index(rowNumber, 1), message)
+        self.treeModel.setData(self.treeModel.index(rowNumber, 1), message)
         return self.treeModel.itemFromIndex(ind)
+    
+    def print(self, message):
+        self.add('print', message)
         
     def createModel(self):
         model = QStandardItemModel(0, 2, self.treeView)

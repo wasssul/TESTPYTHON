@@ -12,10 +12,26 @@ from ppf.ui.InPlotImage import InPlotImage
 class MainGui(QMainWindow):
     def __init__(self):
         super(MainGui, self).__init__()
-        self.setGeometry(100, 100, 500, 400)
+        self.setGeometry(100, 100, 500, 400) 
+        self.bottomDock = None
         self.ppfmenu = Menu(self)
         self.outText = OutText(self)
-        self.testInPlotImage()
+        self.dockBottom('OutText', self.outText.treeView)
+        self.outPlot = None
+        
+        self.inPlot = InPlotImage(self)
+        self.setCentralWidget(self.inPlot)
+        #self.dockBottom('InPlot', self.inPlot)
+        
+    def dockBottom(self, txt, widget):
+        dock = QDockWidget(txt, self);
+        self.addDockWidget(Qt.BottomDockWidgetArea, dock)
+        dock.setAllowedAreas(Qt.BottomDockWidgetArea) 
+        dock.setWidget(widget)
+        if(self.bottomDock != None):
+            self.tabifyDockWidget(self.bottomDock, dock)
+        self.bottomDock = dock
+            
         
     def browseDataset(self):
         options = QFileDialog.Options() | QFileDialog.DontUseNativeDialog
@@ -28,7 +44,6 @@ class MainGui(QMainWindow):
         
     def testInPlotImage(self):
         dock = QDockWidget("In plot image", self)
-        self.inplot = InPlotImage(self)
         dock.setAllowedAreas(Qt.BottomDockWidgetArea)
         dock.setWidget(self.inplot)
         

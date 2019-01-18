@@ -7,8 +7,10 @@ class Globals:
         self.outPlot = None
         self.scripts = None;
         
-    def set(self, mainPath):
+    def set(self, mainPath, outText, outPlot):
         self.mainPath = mainPath
+        self.outText = outText
+        self.outPlot = outPlot
         
     def loadScripts(self):
         if(self.scripts == None):
@@ -20,6 +22,9 @@ class Globals:
     
 
 ppf_ = Globals()
+'''
+returns the global variables
+'''
 def g():
     return ppf_
     
