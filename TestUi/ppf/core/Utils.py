@@ -1,3 +1,6 @@
+import os
+import time
+
 
 class Globals:
     
@@ -29,22 +32,36 @@ def g():
     return ppf_
     
 
-import os
+
 class ScriptUtils:
     
     def __init__(self):
         pass
     
     def load(self):
-        dirPath = os.path.join( g().mainPath, 'ppf', 'scripts')
-        print(dirPath)
+        dirPath = 'ppf/scripts' #os.path.join( g().mainPath, 'ppf', 'scripts')
+        scripts = []
+        #print(dirPath)
         for file in os.listdir(dirPath):
-            print('file', file)
-            modPath = 'ppf.scripts.' + file
-            print('modPath', modPath)
-            module = __import__(modPath)
-            print('module', module)
+            if(not file.startswith('__')):
+                #print('file', file)
+                modPath = 'ppf.scripts.' + file
+                #print('modPath', modPath)
+                module = __import__(modPath[0:-3])
+                script = getattr(getattr(module.scripts, file[0:-3]), file[0:-3])
+                scripts.append(script('init comment'))
+                #print('script: ', script)
             
-            
+    
+"""
+General utilities
+"""        
+class GUtils:
+    
+    def millis(self):
+        i = round(time.time() * 1000)
+        return i
+    
+                
             
             

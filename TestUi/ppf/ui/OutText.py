@@ -4,22 +4,46 @@ from PyQt5.QtCore import (Qt)
 from PyQt5.QtWidgets import (QTreeView, QDockWidget)
 from PyQt5.QtGui import (QStandardItemModel, QStandardItem)
 from _operator import add
+from PyQt5.Qt import QMainWindow, QAction, QIcon, QToolBar, QSize
 
-class OutText:
+class OutText(QMainWindow):
     
     #self.mainGui
     #self.treeView
     #self.dock
     
     def __init__(self, mainGui):
+        super().__init__()
         self.mainGui = mainGui
-        
-        self.treeView = QTreeView(self.mainGui)
+        self.treeView = QTreeView(self)
         #self.treeView.setRootIsDecorated(False)
         self.treeView.setAlternatingRowColors(True)      
         self.treeModel = self.createModel()
         self.treeView.setModel(self.treeModel)
+        self.setCentralWidget(self.treeView)
+        self.initToolBar()
         #self.test()
+        
+    
+    def initToolBar(self):
+        tb = QToolBar(self)
+        self.addToolBar(Qt.LeftToolBarArea, tb)
+        tb.setIconSize( QSize(12, 12) )
+        tb.actionTriggered[QAction].connect(self.toolAction)
+        #tb.setToolButtonStyle()
+        #tbStyle = tb.toolButtonStyle()
+        #tb.setToolButtonStyle(tbStyle)
+        deleteAction = QAction(QIcon("ppf/ui/icons/delete.png"), "delete all", self)
+        deleteAction.a = lambda: self.treeModel.removeRows(0, self.treeModel.rowCount())
+        #model = QStandardItemModel()
+        #model.
+        tb.addAction(deleteAction)
+        
+    #def clearAll(self):
+            
+        
+    def toolAction(self, a):
+        a.a()
         
     def test(self):
         row = QStandardItem('Test')
@@ -50,7 +74,7 @@ class OutText:
         
     def createModel(self):
         model = QStandardItemModel(0, 2, self.treeView)
-        model.setHeaderData(0, Qt.Horizontal, "Model")
+        model.setHeaderData(0, Qt.Horizontal, "Unit")
         model.setHeaderData(1, Qt.Horizontal, "Text")
         
         return model

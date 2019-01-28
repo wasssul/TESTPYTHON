@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
+encoding//ppf/core/ScriptBase.py=utf-8
 encoding//ppf/core/Utils.py=utf-8
+encoding//ppf/core/__init__.py=utf-8
+encoding//ppf/scripts/__init__.py=utf-8
 encoding//ppf/ui/InPlotImage.py=utf-8
 encoding//ppf/ui/OutText.py=utf-8

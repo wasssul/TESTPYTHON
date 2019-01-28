@@ -6,7 +6,7 @@ from PyQt5.QtCore import (Qt)
 from ppf.ui.Menu import Menu
 from ppf.ui.OutText import OutText
 from ppf.core.Utils import g
-from ppf.ui.InPlotImage import InPlotImage
+from ppf.ui.InPlotImage import InPlotImage, InPlotForm
 
         
 class MainGui(QMainWindow):
@@ -16,10 +16,10 @@ class MainGui(QMainWindow):
         self.bottomDock = None
         self.ppfmenu = Menu(self)
         self.outText = OutText(self)
-        self.dockBottom('OutText', self.outText.treeView)
-        self.outPlot = None
+        self.dockBottom('OutText', self.outText)
+        self.outPlot = None 
         
-        self.inPlot = InPlotImage(self)
+        self.inPlot = InPlotForm(self)
         self.setCentralWidget(self.inPlot)
         #self.dockBottom('InPlot', self.inPlot)
         
